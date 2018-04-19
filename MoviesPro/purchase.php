@@ -1,7 +1,7 @@
 <?php # Script - purchase.php
 session_start();
 // This page will check that the user is logged in
-
+// FOR SOME REASON THE LOGIN PAGE DOES NOT SET THE ADMINISTRATOR VALUE CORRECTLY! UNLESS IT'S DEFAULTING TO TRUE THIS PAGE DOES NOT WORK FOR ADMINS!!!
 $page_title = 'Purchase Tickets';
 include ('includes/header.html');
 require_once('../mysqli_connect.php'); // Connect to the db.
@@ -110,18 +110,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       echo "<h3> PHP List All Session Variables</h3>";
       foreach ($_SESSION as $key=>$val)
       echo $key." ".$val."<br/>";
-      //echo "$_SESSION['administrator']";
-      if (isset($_SESSION['administrator']) && $_SESSION['administrator'] == true) {
-        echo '<input type="submit" name="gift" value="Gift" />';
-      }
-
 
     ?>
   </form>
 </div>
 
 <?php
-  $_SESSION['administrator'] == true;
   if (isset($_SESSION['administrator']) && $_SESSION['administrator'] == true) {
 ?>
 
@@ -147,18 +141,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </select><br /><br />
     <label for="num_tickets">Quantity</label>
     <input type="number" name="num_tickets" id="movie"><br /><br />
-    <input type="submit" name="submit" value="Purchase" />
-    <?php
-      echo "<h3> PHP List All Session Variables</h3>";
-      foreach ($_SESSION as $key=>$val)
-      echo $key." ".$val."<br/>";
-      //echo "$_SESSION['administrator']";
-      if (isset($_SESSION['administrator']) && $_SESSION['administrator'] == true) {
-        echo '<input type="submit" name="gift" value="Gift" />';
-      }
+    <input type="submit" name="gift" value="Gift" />
 
-
-    ?>
       </form>
     </div>
 
@@ -184,18 +168,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </select><br /><br />
         <label for="num_tickets">Quantity</label>
         <input type="number" name="num_tickets" id="movie"><br /><br />
-        <input type="submit" name="submit" value="Purchase" />
-        <?php
-          echo "<h3> PHP List All Session Variables</h3>";
-          foreach ($_SESSION as $key=>$val)
-          echo $key." ".$val."<br/>";
-          //echo "$_SESSION['administrator']";
-          if (isset($_SESSION['administrator']) && $_SESSION['administrator'] == true) {
-            echo '<input type="submit" name="gift" value="Gift" />';
-          }
+        <input type="submit" name="update" value="Update" />
 
-
-        ?>
       </form>
     </div>
   </div>
