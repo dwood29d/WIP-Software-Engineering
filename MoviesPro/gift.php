@@ -1,6 +1,6 @@
 <?php # Script - purchase.php
 session_start();
-// This page will confirm that an administrator has gifted tickets. It will show an error if there is a failure of any kind.
+// This page will confirm that an administrator has gifted tickets. It will show an error if there is a failure of any kind. This will also eventually validate the number of tickets against the number of tickets available
 $page_title = 'Gift Tickets';
 include ('includes/header.html');
 require_once('../mysqli_connect.php'); // Connect to the db.
@@ -34,11 +34,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $qu = mysqli_real_escape_string($dbc, trim($_POST['num_tickets']));
   } //echo "$th";
 
+  if (empty($_POST['email'])) {
+    $errors[] = 'You forgot to specify to whom the tickets will be gifted.';
+  } else {
+    $e = mysqli_real_escape_string($dbc, trim($_POST['email']));
+  }
+
   if (empty($errors)) { // Postback and all clear
 
     // Make an update query'
     for ($i = 0; $i < $_POST['num_tickets']; $i++){
-      $q3 = "INSERT INTO tickets (movie_id, theater_id, price) VALUES ($mo, $th, 10.00)";
+      $q3 = "INSERT INTO tickets (movie_id, theater_id, price) VALUES ($mo, $th, 0.00)";
       $r3 = @mysqli_query($dbc, $q3); // Create a ticket record
     }
     if ($r3) { // If the query worked.
@@ -53,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $result2 = $result2['theater_name'];
       // Print a message:
       echo "<h1>Thank You!</h1>
-      <p>You have gifted a ticket to see $result at $result2!</p><p><br /></p>";
+      <p>You have gifted tickets to see $result at $result2 to $e!</p><p><br /></p>";
     } else { // If the query failed
 
       echo '<h1>System Error</h1>

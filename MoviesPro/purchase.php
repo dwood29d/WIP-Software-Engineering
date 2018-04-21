@@ -83,104 +83,108 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 
 <div class="purchase_page">
-<div class="purchase">
-<h1>Purchase Tickets</h1>
-  <form action="purchase.php" method="post">
-    <label for="theater">Theater: </label>
-    <select name="theater" id="theater">
+  <div class="purchase">
+  <h1>Purchase Tickets</h1>
+    <form action="purchase.php" method="post">
+      <label for="theater">Theater: </label>
+      <select name="theater" id="theater">
+        <?php
+          while ($row = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
+            echo '<option value="' . $row['theater_id'] . '">' . $row['theater_name'] . '</option>';
+          }
+        ?>
+      </select><br /><br />
+
+      <label for="movie">Movie: </label>
+      <select name="movie" id="movie">
+        <?php
+          while ($row2 = mysqli_fetch_array($r2, MYSQLI_ASSOC)) {
+            echo '<option value="' . $row2['movie_id'] . '">' . $row2['movie_title'] . '</option>';
+          }
+        ?>
+      </select><br /><br />
+      <label for="num_tickets">Quantity</label>
+      <input type="number" name="num_tickets" id="movie"><br /><br />
+      <input type="submit" name="submit" value="Purchase" />
       <?php
-        while ($row = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
-          echo '<option value="' . $row['theater_id'] . '">' . $row['theater_name'] . '</option>';
-        }
+        echo "<h3> PHP List All Session Variables</h3>";
+        foreach ($_SESSION as $key=>$val)
+        echo $key." ".$val."<br/>";
+
       ?>
-    </select><br /><br />
+    </form>
+  </div>
 
-    <label for="movie">Movie: </label>
-    <select name="movie" id="movie">
-      <?php
-        while ($row2 = mysqli_fetch_array($r2, MYSQLI_ASSOC)) {
-          echo '<option value="' . $row2['movie_id'] . '">' . $row2['movie_title'] . '</option>';
-        }
-      ?>
-    </select><br /><br />
-    <label for="num_tickets">Quantity</label>
-    <input type="number" name="num_tickets" id="movie"><br /><br />
-    <input type="submit" name="submit" value="Purchase" />
-    <?php
-      echo "<h3> PHP List All Session Variables</h3>";
-      foreach ($_SESSION as $key=>$val)
-      echo $key." ".$val."<br/>";
+  <?php
+    if (isset($_SESSION['administrator']) && $_SESSION['administrator'] == true) {
+  ?>
 
-    ?>
-  </form>
-</div>
-
-<?php
-  if (isset($_SESSION['administrator']) && $_SESSION['administrator'] == true) {
-?>
-
-<div class="purchase">
-<h1>Gift Tickets</h1>
-  <form action="gift.php" method="post">
-    <label for="theater">Theater: </label>
-    <select name="theater" id="theater">
-      <?php
-        $q = "SELECT * FROM theaters";
-        $r = @mysqli_query($dbc, $q); // Run the query
-        $q2 = "SELECT * FROM movies";
-        $r2 = @mysqli_query($dbc, $q2); // Run the query
-        while ($row = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
-          echo '<option value="' . $row['theater_id'] . '">' . $row['theater_name'] . '</option>';
-        }
-      ?>
-    </select><br /><br />
-
-    <label for="movie">Movie: </label>
-    <select name="movie" id="movie">
-      <?php
-        while ($row2 = mysqli_fetch_array($r2, MYSQLI_ASSOC)) {
-          echo '<option value="' . $row2['movie_id'] . '">' . $row2['movie_title'] . '</option>';
-        }
-      ?>
-    </select><br /><br />
-    <label for="num_tickets">Quantity</label>
-    <input type="number" name="num_tickets" id="movie"><br /><br />
-    <input type="submit" name="gift" value="Gift" />
-
-      </form>
-    </div>
-
-    <div class="purchase">
-    <h1>Update Tickets</h1>
-      <form action="purchase.php" method="post">
-        <label for="theater">Theater: </label>
-        <select name="theater" id="theater">
-          <?php
+  <div class="purchase">
+  <h1>Gift Tickets</h1>
+    <form action="gift.php" method="post">
+      <label for="theater">Theater: </label>
+      <select name="theater" id="theater">
+        <?php
           $q = "SELECT * FROM theaters";
           $r = @mysqli_query($dbc, $q); // Run the query
           $q2 = "SELECT * FROM movies";
           $r2 = @mysqli_query($dbc, $q2); // Run the query
-            while ($row = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
-              echo '<option value="' . $row['theater_id'] . '">' . $row['theater_name'] . '</option>';
-            }
-          ?>
-        </select><br /><br />
+          while ($row = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
+            echo '<option value="' . $row['theater_id'] . '">' . $row['theater_name'] . '</option>';
+          }
+        ?>
+      </select><br /><br />
 
-        <label for="movie">Movie: </label>
-        <select name="movie" id="movie">
-          <?php
-            while ($row2 = mysqli_fetch_array($r2, MYSQLI_ASSOC)) {
-              echo '<option value="' . $row2['movie_id'] . '">' . $row2['movie_title'] . '</option>';
-            }
-          ?>
-        </select><br /><br />
-        <label for="num_tickets">Quantity</label>
-        <input type="number" name="num_tickets" id="movie"><br /><br />
-        <input type="submit" name="update" value="Update" />
+      <label for="movie">Movie: </label>
+      <select name="movie" id="movie">
+        <?php
+          while ($row2 = mysqli_fetch_array($r2, MYSQLI_ASSOC)) {
+            echo '<option value="' . $row2['movie_id'] . '">' . $row2['movie_title'] . '</option>';
+          }
+        ?>
+      </select><br /><br />
+      <label for="num_tickets">Quantity</label>
+      <input type="number" name="num_tickets" id="movie"><br /><br />
 
-      </form>
-    </div>
+      <label for="email">User Email</label>
+      <input type="text" name="email" size="20" maxlength="60" /><br /><br />
+      <input type="submit" name="gift" value="Gift" />
+
+    </form>
   </div>
+
+  <div class="purchase">
+  <h1>Update Tickets</h1>
+    <form action="purchase.php" method="post">
+      <label for="theater">Theater: </label>
+      <select name="theater" id="theater">
+        <?php
+        $q = "SELECT * FROM theaters";
+        $r = @mysqli_query($dbc, $q); // Run the query
+        $q2 = "SELECT * FROM movies";
+        $r2 = @mysqli_query($dbc, $q2); // Run the query
+          while ($row = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
+            echo '<option value="' . $row['theater_id'] . '">' . $row['theater_name'] . '</option>';
+          }
+        ?>
+      </select><br /><br />
+
+      <label for="movie">Movie: </label>
+      <select name="movie" id="movie">
+        <?php
+          while ($row2 = mysqli_fetch_array($r2, MYSQLI_ASSOC)) {
+            echo '<option value="' . $row2['movie_id'] . '">' . $row2['movie_title'] . '</option>';
+          }
+        ?>
+      </select><br /><br />
+      <label for="num_tickets">Quantity</label>
+      <input type="number" name="num_tickets" id="movie"><br /><br />
+      <input type="submit" name="update" value="Update" />
+
+
+    </form>
+  </div>
+</div>
 <?php } ?>
 <br /><br /><br />
 <?php
