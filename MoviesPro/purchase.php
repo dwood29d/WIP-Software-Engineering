@@ -121,10 +121,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <div class="purchase">
 <h1>Gift Tickets</h1>
-  <form action="purchase.php" method="post">
+  <form action="gift.php" method="post">
     <label for="theater">Theater: </label>
     <select name="theater" id="theater">
       <?php
+        $q = "SELECT * FROM theaters";
+        $r = @mysqli_query($dbc, $q); // Run the query
+        $q2 = "SELECT * FROM movies";
+        $r2 = @mysqli_query($dbc, $q2); // Run the query
         while ($row = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
           echo '<option value="' . $row['theater_id'] . '">' . $row['theater_name'] . '</option>';
         }
@@ -152,6 +156,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <label for="theater">Theater: </label>
         <select name="theater" id="theater">
           <?php
+          $q = "SELECT * FROM theaters";
+          $r = @mysqli_query($dbc, $q); // Run the query
+          $q2 = "SELECT * FROM movies";
+          $r2 = @mysqli_query($dbc, $q2); // Run the query
             while ($row = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
               echo '<option value="' . $row['theater_id'] . '">' . $row['theater_name'] . '</option>';
             }

@@ -21,5 +21,7 @@
   <p>You are now logged in, {$_SESSION['first_name']}!</p>
   <p><a href=\"logout.php\">Logout</a></p>";
 
+  echo "<h1> " . $_SESSION['administrator'] . "</h1>";
+
   include ('includes/footer.html');
 ?>

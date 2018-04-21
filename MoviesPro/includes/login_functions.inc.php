@@ -52,7 +52,7 @@
     if (empty($errors)) { // If everything's OK.
 
       // Retrieve the user_id and first_name for that email/password combination
-      $q = "SELECT user_id, first_name FROM users WHERE email='$e' AND pass=SHA1('$p')";
+      $q = "SELECT user_id, first_name, administrator FROM users WHERE email='$e' AND pass=SHA1('$p')";
       $r = @mysqli_query ($dbc, $q); // Run the query.
 
       // Check the results:

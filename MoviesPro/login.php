@@ -18,7 +18,7 @@
       session_start();
       $_SESSION['user_id'] = $data['user_id'];
       $_SESSION['first_name'] = $data['first_name'];
-      $_SESSION['administrator'] = true;//$data['administrator'];
+      $_SESSION['administrator'] = $data['administrator'];
 
       // Store the HTTP_USER_AGENT:
       $_SESSION['agent'] = md5($_SERVER['HTTP_USER_AGENT']);
