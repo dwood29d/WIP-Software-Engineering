@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <div class="purchase_page">
   <div class="purchase">
-  <h1>Purchase Tickets</h1>
+  <h1>Purchase Tickets</h1><br /><br /
     <form action="purchase.php" method="post">
       <label for="theater">Theater: </label>
       <select name="theater" id="theater">
@@ -120,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   ?>
 
   <div class="purchase">
-  <h1>Gift Tickets</h1>
+  <h1>Gift Tickets</h1><br /><br />
     <form action="gift.php" method="post">
       <label for="theater">Theater: </label>
       <select name="theater" id="theater">
@@ -154,7 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   </div>
 
   <div class="purchase">
-  <h1>Update Tickets</h1>
+  <h1>Update Tickets</h1><br /><br /
     <form action="purchase.php" method="post">
       <label for="theater">Theater: </label>
       <select name="theater" id="theater">
