@@ -3,6 +3,7 @@ CREATE TABLE theaters (
   theater_name varchar(50) NOT NULL,
   seats_per_theater int NOT NULL,
   zipcode int NOT NULL,
+  price float DEFAULT 10.00,
   PRIMARY KEY (theater_id)
 );
 

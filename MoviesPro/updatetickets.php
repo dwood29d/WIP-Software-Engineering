@@ -28,23 +28,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   } //echo "$mo";
 
   // Check for ticket quantity
-  if (empty($_POST['num_tickets'])) {
-    $errors[] = 'You forgot to specify the number of tickets.';
+  if (empty($_POST['new_total_seats'])) {
+    $errors[] = 'You forgot to specify the new number of seats for this theater.';
   } else {
-    $qu = mysqli_real_escape_string($dbc, trim($_POST['num_tickets']));
+    $nts = mysqli_real_escape_string($dbc, trim($_POST['num_tickets']));
   } //echo "$th";
 
-  if (empty($_POST['email'])) {
-    $errors[] = 'You forgot to specify to whom the tickets will be gifted.';
+  if (empty($_POST['new_price'])) {
+    $errors[] = 'You forgot to specify the new price for this theater.';
   } else {
-    $e = mysqli_real_escape_string($dbc, trim($_POST['email']));
+    $np = mysqli_real_escape_string($dbc, trim($_POST['email']));
   }
 
   if (empty($errors)) { // Postback and all clear
 
     // Make an update query'
     for ($i = 0; $i < $_POST['num_tickets']; $i++){
-      $q3 = "INSERT INTO tickets (movie_id, theater_id, price) VALUES ($mo, $th, 0.00)";
+      $q3 = "UPDATE theaters SET seats_per_theater = $nts, price = $np WHERE theater_id = $th"; //"INSERT INTO tickets (movie_id, theater_id, price) VALUES ($mo, $th, 0.00)";
       $r3 = @mysqli_query($dbc, $q3); // Create a ticket record
     }
     if ($r3) { // If the query worked.

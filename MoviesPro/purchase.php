@@ -103,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           }
         ?>
       </select><br /><br />
-      <label for="num_tickets">Quantity</label>
+      <label for="num_tickets">Quantity: </label>
       <input type="number" name="num_tickets" id="movie"><br /><br />
       <input type="submit" name="submit" value="Purchase" />
       <?php
@@ -143,10 +143,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           }
         ?>
       </select><br /><br />
-      <label for="num_tickets">Quantity</label>
+      <label for="num_tickets">Quantity: </label>
       <input type="number" name="num_tickets" id="movie"><br /><br />
 
-      <label for="email">User Email</label>
+      <label for="email">User Email: </label>
       <input type="text" name="email" size="20" maxlength="60" /><br /><br />
       <input type="submit" name="gift" value="Gift" />
 
@@ -155,7 +155,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   <div class="purchase">
   <h1>Update Tickets</h1><br /><br /
-    <form action="purchase.php" method="post">
+    <form action="updatetickets.php" method="post">
       <label for="theater">Theater: </label>
       <select name="theater" id="theater">
         <?php
@@ -177,8 +177,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           }
         ?>
       </select><br /><br />
-      <label for="num_tickets">Quantity</label>
-      <input type="number" name="num_tickets" id="movie"><br /><br />
+      <label for="new_total_seats">New Total Seats: </label>
+      <input type="number" name="seats_per_theater">
+      </select><br /><br />
+
+    <!-- Find a way to validate that this is a price (regex?) -->
+      <label for="new_price">New Price: </label>
+      <input type="text" name="price" pattern="\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{2})"><br /><br />
       <input type="submit" name="update" value="Update" />
 
 
