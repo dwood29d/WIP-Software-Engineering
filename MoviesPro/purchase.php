@@ -35,16 +35,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $qu = mysqli_real_escape_string($dbc, trim($_POST['num_tickets']));
   } //echo "$th";
 
-  $purchased_seats = "SELECT seats_purchased FROM movies_theaters WHERE movie_id = $mo AND theater_id = $th";
+  $purchased_seats = "SELECT CAST(seats_purchased AS int) FROM movies_theaters WHERE movie_id = $mo AND theater_id = $th";
   $purchased_seats_results = @mysqli_query($dbc, $purchased_seats);
-  $total_seats = "SELECT seats_per_theater FROM theaters WHERE theater_id = $th";
-  $total_seats_results = @mysqli_query($dbc, $total_seats);
-  $test_seats = $purchased_seats + $_POST['num_tickets'];
+  $total_seats = "SELECT CAST(seats_per_theater AS int) FROM theaters WHERE theater_id = $th";
+  $total_seats_results = @mysqli_query($dbc, $total_seats); // Should be 100
+  $test_seats = $purchased_seats_results + $_POST['num_tickets'];
 // DEBUGGING MESSAGE
-  /*echo "<h1>These are my Variables!</h1><p>$th, $mo, $total_seats_results, $purchased_seats_results, $test_seats</p>";*/
-  if ($test_seats > $total_seats) {
+  /*echo "<h1>These are my Variables!</h1><p>$th, $mo, $total_seats_results, $purchased_seats_results, $test_seats</p>";
+  if ($test_seats > $total_seats_results) {
     $errors[] = 'There are not enough seats available at this theater please choose a different amount';
-  }
+  }*/
 
   if (empty($errors)) { // Postback and all clear
 
@@ -167,36 +167,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   </div>
 
   <div class="purchase">
-  <h1>Update Tickets</h1><br /><br /
+  <h1>Update Tickets</h1><br /><br />
     <form action="updatetickets.php" method="post">
       <label for="theater">Theater: </label>
       <select name="theater" id="theater">
         <?php
         $q = "SELECT * FROM theaters";
         $r = @mysqli_query($dbc, $q); // Run the query
-        $q2 = "SELECT * FROM movies";
-        $r2 = @mysqli_query($dbc, $q2); // Run the query
           while ($row = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
             echo '<option value="' . $row['theater_id'] . '">' . $row['theater_name'] . '</option>';
           }
         ?>
       </select><br /><br />
 
-      <label for="movie">Movie: </label>
-      <select name="movie" id="movie">
-        <?php
-          while ($row2 = mysqli_fetch_array($r2, MYSQLI_ASSOC)) {
-            echo '<option value="' . $row2['movie_id'] . '">' . $row2['movie_title'] . '</option>';
-          }
-        ?>
-      </select><br /><br />
       <label for="new_total_seats">New Total Seats: </label>
-      <input type="number" name="seats_per_theater">
+      <input type="number" name="new_total_seats">
       </select><br /><br />
 
     <!-- Find a way to validate that this is a price (regex?) -->
       <label for="new_price">New Price: </label>
-      <input type="text" name="price" pattern="\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{2})"><br /><br />
+      <input type="text" name="new_price" pattern="\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{2})"><br /><br />
       <input type="submit" name="update" value="Update" />
 
 
