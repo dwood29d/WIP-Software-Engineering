@@ -43,8 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $total_seats_num = mysqli_fetch_array($total_seats_results);
   $test_seats = $purchased_seats_num[0] + $_POST['num_tickets'];
 // DEBUGGING MESSAGE
-  echo "<h1>These are my Variables!</h1><p>$th, $mo, $total_seats_num[0], $purchased_seats_num[0], $test_seats</p>";
-  if ($test_seats > $total_seats_num) {
+  /*echo "<h1>These are my Variables!</h1><p>$th, $mo, $total_seats_num[0], $purchased_seats_num[0], $test_seats</p>";*/
+  if ($test_seats > $total_seats_num[0]) {
     $errors[] = 'There are not enough seats available at this theater please choose a different amount';
   }
 
@@ -120,12 +120,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       </select><br /><br />
       <label for="num_tickets">Quantity: </label>
       <input type="number" name="num_tickets"><br /><br />
-      <input type="submit" name="purchase" value="Purchase">
+      <input type="submit" name="purchase" value="Purchase" class="btn btn-default" />
 
       <?php
-        echo "<h3> PHP List All Session Variables</h3>";
-        foreach ($_SESSION as $key=>$val)
-        echo $key." ".$val."<br/>";
+        //echo "<h3> PHP List All Session Variables</h3>";
+        //foreach ($_SESSION as $key=>$val)
+        //echo $key." ".$val."<br/>";
       ?>
     </form>
   </div>
@@ -163,7 +163,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
       <label for="email">User Email: </label>
       <input type="text" name="email" size="20" maxlength="60" /><br /><br />
-      <input type="submit" name="gift" value="Gift" />
+      <input type="submit" name="gift" value="Gift" class="btn btn-default" />
 
     </form>
   </div>
@@ -189,7 +189,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <!-- Find a way to validate that this is a price (regex?) -->
       <label for="new_price">New Price: </label>
       <input type="text" name="new_price" pattern="\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{2})"><br /><br />
-      <input type="submit" name="update" value="Update" />
+      <input type="submit" name="update" value="Update" class="btn btn-default" />
 
 
     </form>

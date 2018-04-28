@@ -34,10 +34,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   }
 
 
-  $query_num_seats = "SELECT CAST(MAX(seats_purchased) AS int) FROM movies_theaters WHERE theater_id = $th";
+  $query_num_seats = "SELECT MAX(seats_purchased) FROM movies_theaters WHERE theater_id = $th";
   $res = @mysqli_query($dbc, $query_num_seats);
+  $res_num = mysqli_fetch_array($res);
 
-  if (is_int($res) && $res > $nts) {
+  if ($res_num[0] > $nts) {
     $errors[] = "The number of purchased tickets is already greater than the new number of available seats. The number of new total seats is $nts and the purchased seats is";
   }
 
