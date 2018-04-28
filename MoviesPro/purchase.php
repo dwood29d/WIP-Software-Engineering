@@ -35,16 +35,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $qu = mysqli_real_escape_string($dbc, trim($_POST['num_tickets']));
   } //echo "$th";
 
-  $purchased_seats = "SELECT CAST(seats_purchased AS int) FROM movies_theaters WHERE movie_id = $mo AND theater_id = $th";
+  $purchased_seats = "SELECT seats_purchased FROM movies_theaters WHERE movie_id = $mo AND theater_id = $th";
   $purchased_seats_results = @mysqli_query($dbc, $purchased_seats);
-  $total_seats = "SELECT CAST(seats_per_theater AS int) FROM theaters WHERE theater_id = $th";
+  $purchased_seats_num = mysqli_fetch_array($purchased_seats_results);
+  $total_seats = "SELECT seats_per_theater FROM theaters WHERE theater_id = $th";
   $total_seats_results = @mysqli_query($dbc, $total_seats); // Should be 100
-  $test_seats = $purchased_seats_results + $_POST['num_tickets'];
+  $total_seats_num = mysqli_fetch_array($total_seats_results);
+  $test_seats = $purchased_seats_num[0] + $_POST['num_tickets'];
 // DEBUGGING MESSAGE
-  /*echo "<h1>These are my Variables!</h1><p>$th, $mo, $total_seats_results, $purchased_seats_results, $test_seats</p>";
-  if ($test_seats > $total_seats_results) {
+  echo "<h1>These are my Variables!</h1><p>$th, $mo, $total_seats_num[0], $purchased_seats_num[0], $test_seats</p>";
+  if ($test_seats > $total_seats_num) {
     $errors[] = 'There are not enough seats available at this theater please choose a different amount';
-  }*/
+  }
 
   if (empty($errors)) { // Postback and all clear
 
