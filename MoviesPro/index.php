@@ -6,23 +6,20 @@
   //   echo '<p class="ad">This is an annoying ad! This is an annoying ad! This is an annoying ad! This is an annoying ad! </p>';
   // } //End of the function definition
 
-  $page_title = 'Welcome to this Site!';
+  $page_title = 'MoviesPro';
   include ('includes/header.html');
 
   // Call the function;
   // create_ad();
 ?>
+<div class="text-center">
+  <img src="images/movies.jpg" class="img-fluid home-image">
+</div>
+<h1>Welcome To MoviesPro</h1>
 
-<h1>Content Header</h1>
+  <p>We built this as a space for movie lovers to meet like minded movie lovers and discuss their favorite films, stories, and actors, while also giving them access to all the newest films.</p>
 
-  <p>This is where the page-specific content goes. This section, and the
-  corresponding header, will change from one page to the next.</p>
-
-  <p>Volutpat at varius sed sollicitudin et, arcu. Vivamus viverra. Nullam turpis.
-  Vestibulum sed etiam. Lorem ipsum sit amet dolore. Nulla facilisi. Sed tortor. Aenean felis.
-  Quisque eros. Cras lobortis commodo metus. Vestibulum vel purus. In eget odio in sapien
-  adipiscing blandit. Quisque augue tortor, facilisi sit amet, aliquam, suscipit vitae, cursus
-  sed, arcu lorem ipsum dolor sit amet.</p>
+  <p>We welcome you and hope that you enjoy the ride. Check out the forums for conversation, purchase some tickets, and register with us to join our community. Registration comes with its own benefits.</p>
 
 <?php
 
