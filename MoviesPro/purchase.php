@@ -100,8 +100,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <div class="purchase_page">
   <div class="purchase">
   <h1>Purchase Tickets</h1><br /><br />
-    <form action="purchase.php" method="post">
-      <label for="theater">Theater: </label>
+    <form action="purchase.php" method="post" class="devin-form">
+      <label for="theater">Theater: </label><br />
       <select name="theater">
         <?php
           while ($row = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ?>
       </select><br /><br />
 
-      <label for="movie">Movie: </label>
+      <label for="movie">Movie: </label><br />
       <select name="movie">
         <?php
           while ($row2 = mysqli_fetch_array($r2, MYSQLI_ASSOC)) {
@@ -118,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           }
         ?>
       </select><br /><br />
-      <label for="num_tickets">Quantity: </label>
+      <label for="num_tickets">Quantity: </label><br />
       <input type="number" name="num_tickets"><br /><br />
       <input type="submit" name="purchase" value="Purchase" class="btn btn-default" />
 
@@ -136,8 +136,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   <div class="purchase">
   <h1>Gift Tickets</h1><br /><br />
-    <form action="gift.php" method="post">
-      <label for="theater">Theater: </label>
+    <form action="gift.php" method="post" class="devin-form">
+      <label for="theater">Theater: </label><br />
       <select name="theater">
         <?php
           $q = "SELECT * FROM theaters";
@@ -150,7 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ?>
       </select><br /><br />
 
-      <label for="movie">Movie: </label>
+      <label for="movie">Movie: </label><br />
       <select name="movie">
         <?php
           while ($row2 = mysqli_fetch_array($r2, MYSQLI_ASSOC)) {
@@ -158,10 +158,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           }
         ?>
       </select><br /><br />
-      <label for="num_tickets">Quantity: </label>
+      <label for="num_tickets">Quantity: </label><br />
       <input type="number" name="num_tickets"><br /><br />
 
-      <label for="email">User Email: </label>
+      <label for="email">User Email: </label><br />
       <input type="text" name="email" size="20" maxlength="60" /><br /><br />
       <input type="submit" name="gift" value="Gift" class="btn btn-default" />
 
@@ -170,8 +170,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   <div class="purchase">
   <h1>Update Tickets</h1><br /><br />
-    <form action="updatetickets.php" method="post">
-      <label for="theater">Theater: </label>
+    <form action="updatetickets.php" method="post" class="devin-form">
+      <label for="theater">Theater: </label><br />
       <select name="theater" id="theater">
         <?php
         $q = "SELECT * FROM theaters";
@@ -182,12 +182,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ?>
       </select><br /><br />
 
-      <label for="new_total_seats">New Total Seats: </label>
+      <label for="new_total_seats">New Total Seats: </label><br />
       <input type="number" name="new_total_seats">
       </select><br /><br />
 
     <!-- Find a way to validate that this is a price (regex?) -->
-      <label for="new_price">New Price: </label>
+      <label for="new_price">New Price: </label><br />
       <input type="text" name="new_price" pattern="\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{2})"><br /><br />
       <input type="submit" name="update" value="Update" class="btn btn-default" />
 

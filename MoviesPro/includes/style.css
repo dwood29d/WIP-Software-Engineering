@@ -67,7 +67,7 @@ body {
 #navigation li {
 	border-left:1px solid #999;
 	float:left;
-	width:12.5%;/*149px*/
+	width:16.6%;/*149px*/
 	list-style:none;
 	font-size: 150%;
 }
@@ -155,4 +155,12 @@ input, select, .input {
 }
 .home-image {
 	margin-top: 40px;
+}
+
+.devin-form input {
+	width:100%;
+}
+
+.devin-form select {
+	width: 100%;
 }

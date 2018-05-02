@@ -10,7 +10,7 @@ CREATE TABLE theaters (
 CREATE TABLE movies (
   movie_id int UNIQUE NOT NULL AUTO_INCREMENT,
   movie_title varchar(50) NOT NULL,
-  duration int NOT NULL
+  duration int NOT NULL,
   PRIMARY KEY (movie_id),
   FOREIGN KEY (theater_id) REFERENCES theaters(theater_id)
 );
